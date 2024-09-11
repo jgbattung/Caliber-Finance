@@ -2,69 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
-
-:root {
-  /* Light mode colors */
-  --color-background-950: #F8F7F4;
-  --color-background-900: #E8E7E0;
-  --color-background-800: #F0EFE9;
-  
-  --color-primary-700: #007A77;
-  --color-primary-600: #008C89;
-  --color-primary-500: #00A9A5;
-  
-  --color-accent-700: #CCB000;
-  --color-accent-600: #E6C200;
-  --color-accent-500: #FFD700;
-  
-  --color-success-600: #4CAF50;
-  --color-success-500: #00C853;
-  
-  --color-error-600: #F44336;
-  --color-error-500: #FF5252;
-  
-  --color-text-primary: #333333;
-  --color-text-primary-dark: #6E6E80;
-
-  /* Font families */
-  --font-inter: 'Inter', sans-serif;
-  --font-montserrat: 'Montserrat', sans-serif;
+/* Background colors */
+.bg-darkest {
+  @apply bg-background-950 dark:bg-background-dark-950;
 }
 
-/* Dark mode colors */
-.dark {
-  --color-background-950: #121212;
-  --color-background-900: #1E1E1E;
-  --color-background-800: #2A2A2A;
-  
-  --color-primary-700: #007A77;
-  --color-primary-600: #008C89;
-  --color-primary-500: #00A9A5;
-  
-  --color-accent-700: #CCB000;
-  --color-accent-600: #E6C200;
-  --color-accent-500: #FFD700;
-  
-  --color-success-600: #4CAF50;
-  --color-success-500: #00C853;
-  
-  --color-error-600: #F44336;
-  --color-error-500: #FF5252;
-  
-  --color-text-primary: #EBE9FC;
-  --color-text-primary-dark: #9E9EAF;
+.bg-darker {
+  @apply bg-background-900 dark:bg-background-dark-900;
 }
 
-/* Base styles */
-body {
-  font-family: var(--font-inter);
-  background-color: var(--color-background-950);
-  color: var(--color-text-primary);
+.bg-dark {
+  @apply bg-background-800 dark:bg-background-dark-800;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-montserrat);
+/* Text colors */
+.text-primary {
+  @apply text-text-primary dark:text-text-light-primary;
 }
 
-/* You can add more global styles here */
+.text-secondary {
+  @apply text-text-primary-dark dark:text-text-light-primary-dark;
+}
