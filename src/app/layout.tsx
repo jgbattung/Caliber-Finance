@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
+import BottomNav from "@/components/BottomNav/BottomNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </section>
             {/* <RightSidebar /> */}
           </main>
-          {/* <BottomNav /> */}
+          <BottomNav />
         </ThemeProvider>
       </body>
     </html>
