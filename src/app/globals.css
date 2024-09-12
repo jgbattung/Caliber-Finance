@@ -18,11 +18,11 @@
 }
 
 /* Text colors */
-.text-primary {
+.text-color-primary {
   @apply text-text-primary dark:text-text-light-primary;
 }
 
-.text-secondary {
+.text-color-secondary {
   @apply text-text-primary-dark dark:text-text-light-primary-dark;
 }
 

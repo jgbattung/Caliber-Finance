@@ -45,8 +45,8 @@ module.exports = {
           DEFAULT: '#F44336'
         },
         text: {
-          'primary': '#333333',
-          'primary-dark': '#6E6E80',
+          'primary': '#1A1A1A',
+          'primary-dark': '#4A4A5C',
           'light-primary': '#EBE9FC',
           'light-primary-dark': '#9E9EAF'
         },
@@ -94,6 +94,7 @@ module.exports = {
         'body': '1.1235rem',
         'body-sm': '1rem',
         'body-xs': '0.875rem',
+        'accent-xs': '0.75rem',
       },
       borderRadius: {
         lg: 'var(--radius)',
