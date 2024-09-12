@@ -12,7 +12,7 @@ const NotificationBell: React.FC<NotificationBellProps> = ({ count }) => {
       <IconBell
         size={28}
         stroke={1}
-        className='text-text-light-primary'
+        className='text-color-primary'
       />
       {count > 0 && (
         <div className='absolute flex items-center justify-center w-3 h-3 p-2 text-xs rounded-lg -top-1.5 -right-0.5 bg-notification text-text-light-primary'>
