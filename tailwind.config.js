@@ -41,8 +41,11 @@ module.exports = {
           500: '#FF5252',
           600: '#F44336'
         },
+        notification: {
+          DEFAULT: '#F44336'
+        },
         text: {
-          primary: '#333333',
+          'primary': '#333333',
           'primary-dark': '#6E6E80',
           'light-primary': '#EBE9FC',
           'light-primary-dark': '#9E9EAF'
@@ -90,7 +93,7 @@ module.exports = {
         'heading-md': '1.25rem',
         'body': '1.1235rem',
         'body-sm': '1rem',
-        'body-xs': '0.875',
+        'body-xs': '0.875rem',
       },
       borderRadius: {
         lg: 'var(--radius)',
