@@ -83,6 +83,15 @@ module.exports = {
         inter: ['Inter', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-serif']
       },
+      fontSize: {
+        'heading-2xl': '2.25rem',
+        'heading-xl': '2rem',
+        'heading-lg': '1.5rem',
+        'heading-md': '1.25rem',
+        'body': '1.1235rem',
+        'body-sm': '1rem',
+        'body-xs': '0.875',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
