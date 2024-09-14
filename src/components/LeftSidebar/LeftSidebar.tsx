@@ -11,14 +11,13 @@ const LeftSidebar = () => {
     return (
       <Button
         key={action.buttonId}
-        className='flex items-center justify-start w-full gap-2 text-left transition-all bg-transparent border border-solid hover:bg-transparent border-color text-color-primary hover:shadow-lg group'
+        className='flex items-center justify-start w-full gap-2 text-left transition-all bg-transparent border border-solid hover:bg-slate-300/[0.2] border-color text-color-primary group'
       >
         <Icon
           size={18}
           stroke={1}
-          className='group-hover:text-color-secondary'
         />
-        <p className='text-accent-xs group-hover:text-color-secondary'>{action.text}</p>
+        <p className='text-accent-xs'>{action.text}</p>
       </Button>
     )
   };
