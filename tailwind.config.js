@@ -103,6 +103,8 @@ module.exports = {
         'body-sm': '1rem',
         'body-xs': '0.875rem',
         'accent-xs': '0.75rem',
+        'accent-2xs': '0.688rem',
+        'accent-3xs': '0.625rem',
       },
       borderRadius: {
         lg: 'var(--radius)',
