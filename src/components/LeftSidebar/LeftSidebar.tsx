@@ -32,14 +32,14 @@ const LeftSidebar: React.FC = () => {
     return (
       <Link
         href={link.route}
-        className={`flex px-2 py-2 rounded-md items-center justify-start w-full gap-2 text-left group ${isActive ? 'bg-primary-500' : ''}`}
+        className={`flex px-2 py-2 rounded-md items-center justify-start w-full gap-2 text-left group ${isActive ? 'bg-primary-500 text-text-light-primary' : ''}`}
       >
         <Icon 
           size={19}
           stroke={1}
           className={`transition-all ${isActive ? '' : 'group-hover:text-primary-600'}`}
         />
-        <p className={`transition-all text-accent-xs ${isActive ? '' : 'group-hover:text-primary-600'}`}>{link.text}</p>
+        <p className={`transition-all text-accent-xs ${isActive ? 'font-medium' : 'group-hover:text-primary-700'}`}>{link.text}</p>
       </Link>
     )
   };
@@ -57,7 +57,7 @@ const LeftSidebar: React.FC = () => {
         </div>
         <div className='flex flex-col gap-4'>
         <p className='font-light text-accent-xs text-color-secondary'>Main Menu</p>
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-2'>
             {sidebarMainMenuLinks.map(renderMainMenuLinks)}
           </div>
         </div>
