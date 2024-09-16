@@ -45,7 +45,7 @@ const LeftSidebar: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center w-56 gap-8 p-6 border-r max-lg:hidden border-r-bg-dark'>
+    <div className='flex flex-col items-center justify-center w-56 h-screen gap-8 p-6 border-r max-lg:hidden border-r-bg-dark'>
       <div className='flex flex-col items-start justify-center w-full gap-8'>
         <div className='flex flex-col gap-4'>
           <p className='font-light text-accent-xs text-color-secondary'>Quick Actions</p>
