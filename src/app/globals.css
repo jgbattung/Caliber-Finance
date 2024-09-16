@@ -4,36 +4,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Background colors */
-.bg-darkest {
-  @apply bg-background-950 dark:bg-background-dark-950;
+@layer utilities {
+  /* Background colors */
+  .bg-darkest {
+    @apply bg-background-950 dark:bg-background-dark-950;
+  }
+  
+  .bg-darker {
+    @apply bg-background-900 dark:bg-background-dark-900;
+  }
+  
+  .bg-dark {
+    @apply bg-background-800 dark:bg-background-dark-800;
+  }
+  
+  /* Text colors */
+  .text-color-primary {
+    @apply text-text-primary dark:text-text-light-primary;
+  }
+  
+  .text-color-secondary {
+    @apply text-text-primary-dark dark:text-text-light-primary-dark;
+  }
+  
+  /* Font classes */
+  .font-body {
+    @apply font-inter;
+  }
+  
+  .font-heading {
+    @apply font-montserrat;
+  }
+  
+  /* Border colors */
+  .border-color {
+    @apply border-dark-100 dark:border-light-100;
+  }
+
+  .border-color-hover {
+    @apply border-dark-200 dark:border-light-100
+  }
+
+  /* .element-color {
+    @apply text-
+  } */
 }
 
-.bg-darker {
-  @apply bg-background-900 dark:bg-background-dark-900;
-}
-
-.bg-dark {
-  @apply bg-background-800 dark:bg-background-dark-800;
-}
-
-/* Text colors */
-.text-color-primary {
-  @apply text-text-primary dark:text-text-light-primary;
-}
-
-.text-color-secondary {
-  @apply text-text-primary-dark dark:text-text-light-primary-dark;
-}
-
-/* Font classes */
-.font-body {
-  @apply font-inter;
-}
-
-.font-heading {
-  @apply font-montserrat;
-}
 
 @layer base {
   :root {

@@ -3,13 +3,13 @@
 import React from 'react'
 import "./../../app/globals.css";
 import { usePathname } from 'next/navigation';
-import { bottomNavRoutes, NavigationRoute } from '@/utils/bottomNavRoutes';
+import { bottomNavRoutes, INavigationRoute } from '@/utils/NavigationRoutes/bottomNavRoutes';
 import Link from 'next/link';
 
 const BottomNav: React.FC = () => {
   const currentPathname = usePathname();
 
-  const renderNavItem = (route: NavigationRoute) => {
+  const renderNavItem = (route: INavigationRoute) => {
     const isActive = currentPathname === route.route;
     const Icon = route.Icon
 

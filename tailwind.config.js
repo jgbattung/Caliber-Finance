@@ -10,6 +10,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        light: {
+          100: '#EBE9FC',
+          200: '#9E9EAF'
+        },
+        dark: {
+          100: '#1A1A1A',
+          200: '#4A4A5C'
+        },
         background: {
           950: '#F8F7F4',
           900: '#E8E7E0',
@@ -95,6 +103,8 @@ module.exports = {
         'body-sm': '1rem',
         'body-xs': '0.875rem',
         'accent-xs': '0.75rem',
+        'accent-2xs': '0.688rem',
+        'accent-3xs': '0.625rem',
       },
       borderRadius: {
         lg: 'var(--radius)',

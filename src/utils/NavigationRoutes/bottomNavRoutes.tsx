@@ -1,14 +1,14 @@
 import { Icon, IconArrowsExchange, IconDots, IconGraph, IconHome, IconProps, IconWallet, } from "@tabler/icons-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-export type NavigationRoute = {
+export type INavigationRoute = {
   route: string;
   iconId: string;
   text: string;
   Icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
 };
 
-export const bottomNavRoutes: NavigationRoute[] = [
+export const bottomNavRoutes: INavigationRoute[] = [
   {
     route: '/',
     iconId: 'home',
