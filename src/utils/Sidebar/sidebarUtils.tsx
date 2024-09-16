@@ -1,6 +1,7 @@
 import { FilledWalletIcon, FilledCircleMinusIcon, FilledPigMoneyIcon } from "@/components/icons";
-import { IconProps, Icon, IconCirclePlusFilled, IconCircleArrowUpRightFilled, IconCircleArrowRightFilled, IconHomeFilled, IconSwitchHorizontal, IconTargetArrow, IconGraph, IconRefresh, IconCreditCardFilled } from "@tabler/icons-react";
+import { IconProps, Icon, IconCirclePlusFilled, IconCircleArrowUpRightFilled, IconCircleArrowRightFilled, IconHomeFilled, IconSwitchHorizontal, IconTargetArrow, IconRefresh, IconCreditCardFilled, IconGraphFilled } from "@tabler/icons-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { SIDEBAR_MAIN_MENU_BUTTON_ID, SIDEBAR_MAIN_MENU_TEXT, SIDEBAR_QUICK_ACTIONS_BUTTON_ID, SIDEBAR_QUICK_ACTIONS_TEXT } from "../constants";
 
 export type ISidebarQuickActions = {
   buttonId: string;
@@ -10,24 +11,24 @@ export type ISidebarQuickActions = {
 
 export const sidebarQuickActions: ISidebarQuickActions[] = [
   {
-    buttonId: 'add-income',
+    buttonId: SIDEBAR_QUICK_ACTIONS_BUTTON_ID.ADD_INCOME,
     Icon: IconCirclePlusFilled,
-    text: 'Add Income',
+    text: SIDEBAR_QUICK_ACTIONS_TEXT.ADD_INCOME,
   },
   {
-    buttonId: 'add-expense',
+    buttonId: SIDEBAR_QUICK_ACTIONS_BUTTON_ID.ADD_EXPENSE,
     Icon: FilledCircleMinusIcon,
-    text: 'Add Expense',
+    text: SIDEBAR_QUICK_ACTIONS_TEXT.ADD_EXPENSE,
   },
   {
-    buttonId: 'add-transfer',
+    buttonId: SIDEBAR_QUICK_ACTIONS_BUTTON_ID.ADD_TRANSFER,
     Icon: IconCircleArrowUpRightFilled,
-    text: 'Add Transfer',
+    text: SIDEBAR_QUICK_ACTIONS_TEXT.ADD_TRANSFER,
   },
   {
-    buttonId: 'add-to-goal',
+    buttonId: SIDEBAR_QUICK_ACTIONS_BUTTON_ID.ADD_TO_GOAL,
     Icon: IconCircleArrowRightFilled,
-    text: 'Add to Goal',
+    text: SIDEBAR_QUICK_ACTIONS_TEXT.ADD_TO_GOAL,
   },
 ];
 
@@ -40,51 +41,51 @@ export type ISidebarMainMenuLinks = {
 
 export const sidebarMainMenuLinks: ISidebarMainMenuLinks[] = [
   {
-    buttonId: 'dashboard',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.DASHBOARD,
     route: '/',
     Icon: IconHomeFilled,
-    text: 'Dashboard'
+    text: SIDEBAR_MAIN_MENU_TEXT.DASHBOARD
   },
   {
-    buttonId: 'accounts',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.ACCOUNTS,
     route: '/accounts',
     Icon: FilledWalletIcon,
-    text: 'Accounts'
+    text: SIDEBAR_MAIN_MENU_TEXT.ACCOUNTS
   },
   {
-    buttonId: 'transactions',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.TRANSACTIONS,
     route: '/transactions',
     Icon: IconSwitchHorizontal,
-    text: 'Transactions'
+    text: SIDEBAR_MAIN_MENU_TEXT.TRANSACTIONS
   },
   {
-    buttonId: 'budgets',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.BUDGETS,
     route: '/budgets',
     Icon: FilledPigMoneyIcon,
-    text: 'Budgets'
+    text: SIDEBAR_MAIN_MENU_TEXT.BUDGETS
   },
   {
-    buttonId: 'targets',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.TARGETS,
     route: '/targets',
     Icon: IconTargetArrow,
-    text: 'targets'
+    text: SIDEBAR_MAIN_MENU_TEXT.TARGETS
   },
   {
-    buttonId: 'reports',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.REPORTS,
     route: '/reports',
-    Icon: IconGraph,
-    text: 'Reports'
+    Icon: IconGraphFilled,
+    text: SIDEBAR_MAIN_MENU_TEXT.REPORTS
   },
   {
-    buttonId: 'subscriptions',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.SUBSCRIPTIONS,
     route: '/subscriptions',
     Icon: IconRefresh,
-    text: 'Subscriptions'
+    text: SIDEBAR_MAIN_MENU_TEXT.SUBSCRIPTIONS
   },
   {
-    buttonId: 'cards',
+    buttonId: SIDEBAR_MAIN_MENU_BUTTON_ID.CARDS,
     route: '/cards',
     Icon: IconCreditCardFilled,
-    text: 'Cards'
+    text: SIDEBAR_MAIN_MENU_TEXT.CARDS
   },
 ];
