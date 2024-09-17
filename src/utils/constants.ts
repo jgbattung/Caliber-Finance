@@ -33,3 +33,19 @@ export const SIDEBAR_MAIN_MENU_TEXT = {
   SUBSCRIPTIONS: "Subscriptions",
   CARDS: "Cards"
 };
+
+export const RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM = {
+  PROFILE: "Profile",
+  NOTIFICATIONS: "Notifications",
+  SETTINGS: "Settings",
+  INVITE_USERS: "Invite users",
+  LOGOUT: "Logout"
+};
+
+export const RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID = {
+  PROFILE: "profile",
+  NOTIFICATIONS: "notifications",
+  SETTINGS: "settings",
+  INVITE_USERS: "invite users",
+  LOGOUT: "logout"
+}
