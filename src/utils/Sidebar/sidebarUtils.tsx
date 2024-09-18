@@ -2,7 +2,7 @@ import { FilledWalletIcon, FilledCircleMinusIcon, FilledPigMoneyIcon } from "@/c
 import { IconProps, Icon, IconCirclePlusFilled, IconCircleArrowUpRightFilled, IconCircleArrowRightFilled, IconHomeFilled, IconSwitchHorizontal, IconTargetArrow, IconRefresh, IconCreditCardFilled, IconGraphFilled } from "@tabler/icons-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM, RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID, SIDEBAR_MAIN_MENU_BUTTON_ID, SIDEBAR_MAIN_MENU_TEXT, SIDEBAR_QUICK_ACTIONS_BUTTON_ID, SIDEBAR_QUICK_ACTIONS_TEXT } from "../constants";
-import { LucideProps, User, Bell, Settings, UserPlus, LogOut } from "lucide-react";
+import { LucideProps, User, Bell, Settings, UserPlus } from "lucide-react";
 
 export type ISidebarQuickAction = {
   buttonId: string;
