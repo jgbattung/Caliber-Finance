@@ -1,10 +1,15 @@
-import { IconChevronDown, IconUserCircle } from '@tabler/icons-react'
+"use client"
+
+import { IconChevronDown, IconChevronUp, IconUserCircle } from '@tabler/icons-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
-import React from 'react'
-import { Bell, LogOut, Settings, User, UserPlus } from 'lucide-react';
+import React, { useState } from 'react'
+import { LogOut } from 'lucide-react';
 import { RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM, RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID } from '@/utils/constants';
+import { useRouter } from 'next/navigation';
+import { ISidebarDropdownMenuLink, SidebarDropdownMenuLinks } from '@/utils/Sidebar/sidebarUtils';
 
 const RightSidebar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const notificationCount: number = 2;
   const router = useRouter();
 
@@ -42,16 +47,24 @@ const RightSidebar = () => {
                 {notificationCount > 9 ? '9+' : notificationCount}
               </div>
             )}
-            <DropdownMenu>
+            <DropdownMenu onOpenChange={setIsDropdownOpen}>
               <DropdownMenuTrigger asChild>
                 <button
                   className='absolute right-0 flex items-center justify-center w-6 h-6 rounded-full bottom-1 icon-chevron-bg'
                 >
-                  <IconChevronDown
-                    size={16}
-                    stroke={2}
-                    className='icon-chevron-color'
+                  {isDropdownOpen ? (
+                    <IconChevronUp
+                      size={16}
+                      stroke={2}
+                      className='icon-chevron-color'
                   />
+                  ) : (
+                    <IconChevronDown
+                      size={16}
+                      stroke={2}
+                      className='icon-chevron-color'
+                    />
+                  )}
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className='w-24 mr-4 bg-darkest'>
