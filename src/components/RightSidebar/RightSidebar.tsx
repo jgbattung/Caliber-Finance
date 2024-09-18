@@ -6,6 +6,27 @@ import { RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM, RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID }
 
 const RightSidebar = () => {
   const notificationCount: number = 2;
+  const router = useRouter();
+
+  const handleClick = (href: string) => {
+    router.push(href);
+  };
+  
+  const renderDropdownMenuLinks = (dropdownLink: ISidebarDropdownMenuLink) => {
+    const Icon = dropdownLink.icon
+
+    return (
+      <DropdownMenuItem
+        key={dropdownLink.key}
+        id={dropdownLink.id}
+        onClick={() => handleClick(dropdownLink.href)}
+        className='hover:cursor-pointer hover:hover-color'
+      >
+        <Icon className="w-3.5 h-3.5 mr-2" />
+        <span className='text-accent-xs'>{dropdownLink.label}</span>
+      </DropdownMenuItem>
+    )
+  };
 
   return (
     <div className='flex flex-col items-center justify-start px-4 py-10 border-l w-52 h-scren border-l-bg-dark'>
@@ -33,28 +54,17 @@ const RightSidebar = () => {
                   />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className='w-24 mr-4 bg-darker'>
+              <DropdownMenuContent className='w-24 mr-4 bg-darkest'>
                 <DropdownMenuGroup>
-                  <DropdownMenuItem id={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.PROFILE}>
-                    <User className="w-3.5 h-3.5 mr-2" />
-                    <span className='text-accent-xs'>{RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM.PROFILE}</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem id={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.NOTIFICATIONS}>
-                    <Bell className="w-3.5 h-3.5 mr-2" />
-                    <span className='text-accent-xs'>{RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM.NOTIFICATIONS}</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem id={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.SETTINGS}>
-                    <Settings className="w-3.5 h-3.5 mr-2" />
-                    <span className='text-accent-xs'>{RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM.SETTINGS}</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem id={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.INVITE_USERS}>
-                    <UserPlus className="w-3.5 h-3.5 mr-2" />
-                    <span className='text-accent-xs'>{RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM.INVITE_USERS}</span>
-                  </DropdownMenuItem>
+                  {SidebarDropdownMenuLinks.map(renderDropdownMenuLinks)}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator className='bg-dark' />
                 <DropdownMenuGroup>
-                <DropdownMenuItem id={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.LOGOUT}>
+                <DropdownMenuItem
+                  key={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.LOGOUT}  
+                  id={RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID.LOGOUT}
+                  className='hover:cursor-pointer hover:hover-color'
+                >
                     <LogOut className="w-3.5 h-3.5 mr-2" />
                     <span className='text-accent-xs'>{RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM.LOGOUT}</span>
                   </DropdownMenuItem>
