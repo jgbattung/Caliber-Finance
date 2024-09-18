@@ -6,6 +6,7 @@ import Header from "@/components/Header/Header";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider";
 import BottomNav from "@/components/BottomNav/BottomNav";
 import LeftSidebar from "@/components/LeftSidebar/LeftSidebar";
+import RightSidebar from "@/components/RightSidebar/RightSidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {children}
               </div>
             </section>
-            {/* <RightSidebar /> */}
+            <RightSidebar />
           </main>
           <BottomNav />
         </ThemeProvider>

@@ -2,13 +2,13 @@
 
 import React from 'react'
 import { Button } from '../ui/button'
-import { ISidebarMainMenuLinks, ISidebarQuickActions, sidebarMainMenuLinks, sidebarQuickActions } from '@/utils/Sidebar/sidebarUtils'
+import { ISidebarMainMenuLink, ISidebarQuickAction, sidebarMainMenuLinks, sidebarQuickActions } from '@/utils/Sidebar/sidebarUtils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const LeftSidebar: React.FC = () => {
   const currentPathname = usePathname();
-  const renderQuickActions = (action: ISidebarQuickActions) => {
+  const renderQuickActions = (action: ISidebarQuickAction) => {
     const Icon = action.Icon
 
     return (
@@ -25,7 +25,7 @@ const LeftSidebar: React.FC = () => {
     )
   };
 
-  const renderMainMenuLinks = (link: ISidebarMainMenuLinks) => {
+  const renderMainMenuLinks = (link: ISidebarMainMenuLink) => {
     const isActive = currentPathname === link.route
     const Icon = link.Icon
 

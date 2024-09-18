@@ -17,6 +17,10 @@
   .bg-dark {
     @apply bg-background-800 dark:bg-background-dark-800;
   }
+
+  .hover-color {
+    @apply bg-background-900 dark:bg-background-dark-800
+  }
   
   /* Text colors */
   .text-color-primary {
@@ -45,9 +49,13 @@
     @apply border-dark-200 dark:border-light-100
   }
 
-  /* .element-color {
-    @apply text-
-  } */
+  .icon-chevron-color {
+    @apply text-text-light-primary dark:text-text-primary
+  }
+
+  .icon-chevron-bg {
+    @apply bg-dark-100 dark:bg-background-800
+  }
 }
 
 
