@@ -17,6 +17,10 @@
   .bg-dark {
     @apply bg-background-800 dark:bg-background-dark-800;
   }
+
+  .hover-color {
+    @apply bg-background-900 dark:bg-background-dark-800
+  }
   
   /* Text colors */
   .text-color-primary {
