@@ -1,4 +1,5 @@
 "use client"
+import { headerTestIds } from '@/utils/constants';
 import { IconBell } from '@tabler/icons-react'
 import React from 'react'
 
@@ -10,6 +11,7 @@ const NotificationBell: React.FC<NotificationBellProps> = ({ count }) => {
   return (
     <div className='relative'>
       <IconBell
+        data-testid={headerTestIds.notificationBell}
         size={28}
         stroke={1}
         className='text-color-primary'
