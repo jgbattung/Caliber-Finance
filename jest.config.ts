@@ -79,9 +79,10 @@ const config: Config = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
+  moduleDirectories: [
+    'node_modules',
+    '<rootDir>/'
+  ],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [
@@ -164,10 +165,13 @@ const config: Config = {
   // Adds a location field to test results
   // testLocationInResults: false,
 
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
+
   // The glob patterns Jest uses to detect test files
   // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
+  //   "<rootDir>/src/__tests__/**/*.test.[jt]s?(x)",
+  //   "<rootDir>/src/__tests__/unit/**/*.test.[jt]s?(x)",
+  //   "<rootDir>/src/__tests__/integration/**/*.integration.test.[jt]s?(x)"
   // ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
