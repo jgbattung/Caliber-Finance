@@ -48,4 +48,10 @@ export const RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID = {
   SETTINGS: "settings",
   INVITE_USERS: "invite users",
   LOGOUT: "logout"
-}
+};
+
+export const headerTestIds = {
+  header: "header",
+  notificationBell: "notification-bell",
+  userProfileIcon: "user-profile-icon",
+};
