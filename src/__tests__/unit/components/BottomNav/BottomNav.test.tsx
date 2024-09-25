@@ -34,4 +34,13 @@ describe('Bottom Nav tests', () => {
     const bottomNav = screen.getByTestId(bottomNavTestIds.bottomNav);
     expect(bottomNav).toHaveClass('lg:hidden');
   });
+
+  it('should display text under icons on medium screen sizes', () => {
+    renderBottomNav();
+
+    bottomNavRoutes.forEach((route) => {
+      const text = screen.getByText(route.text);
+      expect(text).toHaveClass('max-sm:hidden');
+    });
+  });
 });
