@@ -55,3 +55,7 @@ export const headerTestIds = {
   notificationBell: "notification-bell",
   userProfileIcon: "user-profile-icon",
 };
+
+export const bottomNavTestIds = {
+  bottomNav: "bottom-nav",
+}

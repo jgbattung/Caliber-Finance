@@ -5,6 +5,7 @@ import "./../../app/globals.css";
 import { usePathname } from 'next/navigation';
 import { bottomNavRoutes, INavigationRoute } from '@/utils/NavigationRoutes/bottomNavRoutes';
 import Link from 'next/link';
+import { bottomNavTestIds } from '@/utils/constants';
 
 const BottomNav: React.FC = () => {
   const currentPathname = usePathname();
@@ -15,11 +16,13 @@ const BottomNav: React.FC = () => {
 
     return (
       <Link
+        id={route.text}
         href={route.route}
         key={route.text}
         className='flex flex-col items-center justify-center gap-1 group'
       >
         <Icon
+          data-testid={`icon-${route.iconId}`}
           size={28}
           stroke={1}
           className={`transition-colors ${isActive ? 'text-primary-500' : 'text-color-primary group-hover:text-primary-500'}`}
@@ -32,7 +35,10 @@ const BottomNav: React.FC = () => {
   };
 
   return (
-    <nav className='fixed bottom-0 flex items-center justify-around w-full py-4 border-t lg:hidden border-t-bg-dark'>
+    <nav
+      data-testid={bottomNavTestIds.bottomNav}
+      className='fixed bottom-0 flex items-center justify-around w-full py-4 border-t lg:hidden border-t-bg-dark'
+    >
       {bottomNavRoutes.map(renderNavItem)}
     </nav>
   );
