@@ -58,4 +58,8 @@ export const headerTestIds = {
 
 export const bottomNavTestIds = {
   bottomNav: "bottom-nav",
-}
+};
+
+export const leftSidebarTestIds = {
+  leftSidebar: "left-sidebar",
+};
