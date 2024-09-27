@@ -63,3 +63,8 @@ export const bottomNavTestIds = {
 export const leftSidebarTestIds = {
   leftSidebar: "left-sidebar",
 };
+
+export const rightSidebarTestIds = {
+  rightSidebar: "right-sidebar",
+  userIcon: "user-icon",
+};
