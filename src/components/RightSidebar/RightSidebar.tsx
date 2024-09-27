@@ -4,7 +4,7 @@ import { IconChevronDown, IconChevronUp, IconUserCircle } from '@tabler/icons-re
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
 import React, { useState } from 'react'
 import { LogOut } from 'lucide-react';
-import { RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM, RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID } from '@/utils/constants';
+import { RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM, RIGHT_SIDEBAR_DROPDOWN_MENU_ITEM_ID, rightSidebarTestIds } from '@/utils/constants';
 import { useRouter } from 'next/navigation';
 import { ISidebarDropdownMenuLink, SidebarDropdownMenuLinks } from '@/utils/Sidebar/sidebarUtils';
 
@@ -34,11 +34,15 @@ const RightSidebar = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-start px-4 py-10 border-l w-52 h-scren border-l-bg-dark'>
+    <div 
+      data-testid={rightSidebarTestIds.rightSidebar}
+      className='flex flex-col items-center justify-start px-4 py-10 border-l w-52 h-scren border-l-bg-dark max-lg:hidden'
+    >
       <div>
         <div className='flex flex-col items-center justify-center gap-2'>
           <div className='relative'>
             <IconUserCircle
+              data-testid={rightSidebarTestIds.userIcon}
               size={75}
               stroke={1}
             />
