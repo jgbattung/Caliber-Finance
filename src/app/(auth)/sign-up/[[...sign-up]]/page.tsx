@@ -3,6 +3,7 @@ import Logo from '@/public/assets/logo.png'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@tabler/icons-react'
+import Link from 'next/link'
 
 const SignUp = () => {
   return (
@@ -69,6 +70,12 @@ const SignUp = () => {
         <div className='w-5/12 border-b border-b-dark-200' />
         <p className='font-light text-accent-2xs dark:text-color-secondary'>or</p>
         <div className='w-5/12 border-b border-b-dark-200' />
+      </div>
+      <div>
+        FORM
+      </div>
+      <div className='flex items-center justify-center mt-5'>
+        <p className='text-accent-xs'>Already have an account? <span><Link href='/sign-in' className='text-green hover:underline'>Log in here.</Link></span></p>
       </div>
     </div>
   )

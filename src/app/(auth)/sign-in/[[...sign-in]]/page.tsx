@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import Logo from '@/public/assets/logo.png'
 import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@tabler/icons-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const SignIn = () => {
@@ -69,6 +70,12 @@ const SignIn = () => {
         <div className='w-5/12 border-b border-b-dark-200' />
         <p className='font-light text-accent-2xs dark:text-color-secondary'>or</p>
         <div className='w-5/12 border-b border-b-dark-200' />
+      </div>
+      <div>
+        FORM
+      </div>
+      <div className='flex items-center justify-center mt-5'>
+        <p className='text-accent-xs'>{`Don't have an account?`} <span><Link href='/sign-up' className='text-green hover:underline'>Register here.</Link></span></p>
       </div>
     </div>
   )
