@@ -20,7 +20,7 @@ const Landing = () => {
       <div className='flex flex-col items-center justify-center gap-3 font-montserrat'>
         <Link
           href='/sign-in'
-          className='flex items-center justify-center py-2 transition-all border rounded-md w-72 hover:bg-primary-600 bg-primary-500 border-primary-500'
+          className='flex items-center justify-center py-2 transition-all border rounded-md w-80 hover:bg-primary-600 bg-primary-500 border-primary-500'
         >
           <p className='font-semibold text-light-100'>
             Login
@@ -28,7 +28,7 @@ const Landing = () => {
         </Link>
         <Link
           href='/sign-up'
-          className='flex items-center justify-center py-2 border-2 rounded-md hover:bg-slate-500/[0.2] transition-all w-72 border-primary-500' 
+          className='flex items-center justify-center py-2 border-2 rounded-md hover:bg-slate-500/[0.2] transition-all w-80 border-primary-500' 
         >
           <p className='font-semibold text-primary-500'>
             Register
