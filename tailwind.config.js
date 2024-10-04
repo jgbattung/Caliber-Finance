@@ -34,6 +34,20 @@ module.exports = {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
         },
+        facebook: {
+          'base': '#4267B2',
+          'lighter': '#5A82D6',
+          'darker': '#354f8c',
+
+        },
+        google: {
+          'base': '#DB4437',
+          'darker': '#B53A2E',
+        },
+        email: {
+          'base': '#E6C200',
+          'darker': '#CCB000'
+        },
         accent: {
           500: '#FFD700',
           600: '#E6C200',
