@@ -30,6 +30,10 @@
   .text-color-secondary {
     @apply text-text-primary-dark dark:text-text-light-primary-dark;
   }
+
+  .text-green {
+    @apply text-primary-700 dark:text-primary-500
+  }
   
   /* Font classes */
   .font-body {
