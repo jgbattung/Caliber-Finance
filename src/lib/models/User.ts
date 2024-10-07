@@ -7,6 +7,7 @@ export interface IUser extends Document {
   image?: string;
   password?: string;
   emailVerified?: Date;
+  provider?: string;
 }
 
 const UserSchema = new mongoose.Schema<IUser>({
@@ -16,6 +17,7 @@ const UserSchema = new mongoose.Schema<IUser>({
   image: { type: String },
   password: { type: String },
   emailVerified: { type: Date },
+  provider: { type: String },
 }, {
   timestamps: true
 });
