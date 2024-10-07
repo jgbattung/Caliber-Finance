@@ -1,11 +1,18 @@
+"use client"
+
 import React from 'react'
 import Logo from '@/public/assets/logo.png'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@tabler/icons-react'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 
 const SignUp = () => {
+  const handleSignUp = (provider: string) => {
+    signIn(provider, { callbackUrl: '/dashboard' });
+  }
+
   return (
     <div className='flex flex-col items-center w-full'>
       <div className='flex flex-col justify-start w-full gap-10'>
@@ -23,6 +30,7 @@ const SignUp = () => {
       <div className='flex flex-col items-center justify-center w-full gap-3 mt-10'>
         <div>
           <Button
+            onClick={() => handleSignUp('facebook')}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md w-72 hover:bg-facebook-darker bg-facebook-base'
           >
             <IconBrandFacebookFilled 
@@ -38,6 +46,7 @@ const SignUp = () => {
         </div>
         <div>
           <Button
+            onClick={() => handleSignUp('google')}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-google-base w-72 hover:bg-google-darker'
           >
             <IconBrandGoogleFilled 
@@ -57,7 +66,7 @@ const SignUp = () => {
           >
             <IconMail
               size={18}
-              stroke={1}
+              stroke={2}
               className='absolute left-5 text-dark-100'
             />
             <p className='text-dark-100 text-body-xs font-montserrat'>
