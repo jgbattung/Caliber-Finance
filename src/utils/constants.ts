@@ -68,3 +68,10 @@ export const rightSidebarTestIds = {
   rightSidebar: "right-sidebar",
   userIcon: "user-icon",
 };
+
+export const landingPageTestsIds = {
+  mainContainer: "main-container",
+  logo: "logo",
+  loginButton: "login-button",
+  registerButton: "register-button",
+}
