@@ -68,3 +68,19 @@ export const rightSidebarTestIds = {
   rightSidebar: "right-sidebar",
   userIcon: "user-icon",
 };
+
+export const landingPageTestsIds = {
+  mainContainer: "main-container",
+  logo: "logo",
+  loginButton: "login-button",
+  registerButton: "register-button",
+};
+
+export const signUpPageTestIds = {
+  signUpContainer: "signup-container",
+  logo: "logo",
+  facebookButton: "facebook-button",
+  googleButton: "google-button",
+  emailButton: "email-button",
+  redirectLink: "redirect-link",
+};
