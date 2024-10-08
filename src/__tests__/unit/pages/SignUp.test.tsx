@@ -1,5 +1,5 @@
 import SignUp from "@/app/(auth)/sign-up/[[...sign-up]]/page";
-import { landingPageTestsIds, signUpPageTestIds } from "@/utils/constants";
+import { signUpPageTestIds } from "@/utils/constants";
 import { render, screen } from "@testing-library/react";
 
 const renderSignUp = () => {
