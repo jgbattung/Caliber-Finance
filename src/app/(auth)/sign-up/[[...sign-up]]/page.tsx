@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@tabler/icons-react'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
+import { signUpPageTestIds } from '@/utils/constants'
 
 const SignUp = () => {
   const handleSignUp = (provider: string) => {
@@ -14,9 +15,13 @@ const SignUp = () => {
   }
 
   return (
-    <div className='flex flex-col items-center w-full'>
+    <div
+      data-testid={signUpPageTestIds.signUpContainer}
+      className='flex flex-col items-center w-full'
+    >
       <div className='flex flex-col justify-start w-full gap-10'>
         <Image 
+          data-testid={signUpPageTestIds.logo}
           src={Logo}
           alt='logo'
           width={90}
@@ -30,6 +35,7 @@ const SignUp = () => {
       <div className='flex flex-col items-center justify-center w-full gap-3 mt-10'>
         <div>
           <Button
+            data-testid={signUpPageTestIds.facebookButton}
             onClick={() => handleSignUp('facebook')}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md w-72 hover:bg-facebook-darker bg-facebook-base'
           >
@@ -46,6 +52,7 @@ const SignUp = () => {
         </div>
         <div>
           <Button
+            data-testid={signUpPageTestIds.googleButton}
             onClick={() => handleSignUp('google')}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-google-base w-72 hover:bg-google-darker'
           >
@@ -62,6 +69,7 @@ const SignUp = () => {
         </div>
         <div>
           <Button
+            data-testid={signUpPageTestIds.emailButton}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-email-base w-72 hover:bg-email-darker'
           >
             <IconMail

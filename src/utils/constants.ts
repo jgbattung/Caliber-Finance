@@ -74,4 +74,12 @@ export const landingPageTestsIds = {
   logo: "logo",
   loginButton: "login-button",
   registerButton: "register-button",
-}
+};
+
+export const signUpPageTestIds = {
+  signUpContainer: "signup-container",
+  logo: "logo",
+  facebookButton: "facebook-button",
+  googleButton: "google-button",
+  emailButton: "email-button",
+};
