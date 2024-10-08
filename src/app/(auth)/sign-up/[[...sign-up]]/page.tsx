@@ -92,7 +92,7 @@ const SignUp = () => {
         FORM
       </div>
       <div className='flex items-center justify-center mt-5'>
-        <p className='text-accent-xs'>Already have an account? <span><Link href='/sign-in' className='text-green hover:underline'>Log in here.</Link></span></p>
+        <p className='text-accent-xs'>Already have an account? <span><Link data-testid={signUpPageTestIds.redirectLink} href='/sign-in' className='text-green hover:underline'>Log in here.</Link></span></p>
       </div>
     </div>
   )

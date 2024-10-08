@@ -82,4 +82,5 @@ export const signUpPageTestIds = {
   facebookButton: "facebook-button",
   googleButton: "google-button",
   emailButton: "email-button",
+  redirectLink: "redirect-link",
 };
