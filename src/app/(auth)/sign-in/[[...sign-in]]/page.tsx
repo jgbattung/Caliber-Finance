@@ -1,15 +1,27 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import Logo from '@/public/assets/logo.png'
+import { signInPageTestIds } from '@/utils/constants'
 import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@tabler/icons-react'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const SignIn = () => {
+  const handleSignIn = (provider: string) => {
+    signIn(provider, { callbackUrl: '/dashboard' });
+  }
+
   return (
-    <div className='flex flex-col items-center w-full'>
+    <div 
+      data-testid={signInPageTestIds.signInContainer}
+      className='flex flex-col items-center w-full'
+    >
       <div className='flex flex-col justify-start w-full gap-10'>
-        <Image 
+        <Image
+          data-testid={signInPageTestIds.logo}
           src={Logo}
           alt='logo'
           width={90}
@@ -23,6 +35,8 @@ const SignIn = () => {
       <div className='flex flex-col items-center justify-center w-full gap-3 mt-10'>
         <div>
           <Button
+            data-testid={signInPageTestIds.facebookButton}
+            onClick={() => handleSignIn('facebook')}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md w-72 hover:bg-facebook-darker bg-facebook-base'
           >
             <IconBrandFacebookFilled 
@@ -38,6 +52,8 @@ const SignIn = () => {
         </div>
         <div>
           <Button
+            data-testid={signInPageTestIds.googleButton}
+            onClick={() => handleSignIn('google')}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-google-base w-72 hover:bg-google-darker'
           >
             <IconBrandGoogleFilled 
@@ -53,6 +69,7 @@ const SignIn = () => {
         </div>
         <div>
           <Button
+            data-testid={signInPageTestIds.emailButton}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-email-base w-72 hover:bg-email-darker'
           >
             <IconMail
@@ -75,7 +92,7 @@ const SignIn = () => {
         FORM
       </div>
       <div className='flex items-center justify-center mt-5'>
-        <p className='text-accent-xs'>{`Don't have an account?`} <span><Link href='/sign-up' className='text-green hover:underline'>Register here.</Link></span></p>
+        <p className='text-accent-xs'>{`Don't have an account?`} <span><Link data-testid={signInPageTestIds.redirectLink} href='/sign-up' className='text-green hover:underline'>Register here.</Link></span></p>
       </div>
     </div>
   )

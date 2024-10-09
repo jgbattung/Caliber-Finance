@@ -84,3 +84,12 @@ export const signUpPageTestIds = {
   emailButton: "email-button",
   redirectLink: "redirect-link",
 };
+
+export const signInPageTestIds = {
+  signInContainer: "signin-container",
+  logo: "logo",
+  facebookButton: "facebook-button",
+  googleButton: "google-button",
+  emailButton: "email-button",
+  redirectLink: "redirect-link",
+};
