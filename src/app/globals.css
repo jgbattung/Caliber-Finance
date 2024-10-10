@@ -26,6 +26,10 @@
   .text-color-primary {
     @apply text-text-primary dark:text-text-light-primary;
   }
+
+  .text-color-primary-reverse {
+    @apply text-text-light-primary dark:text-text-primary
+  }
   
   .text-color-secondary {
     @apply text-text-primary-dark dark:text-text-light-primary-dark;

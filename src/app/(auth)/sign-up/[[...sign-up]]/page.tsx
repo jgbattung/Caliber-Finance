@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '@/public/assets/logo.png'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -10,8 +10,15 @@ import { signIn } from 'next-auth/react'
 import { signUpPageTestIds } from '@/utils/constants'
 
 const SignUp = () => {
+  const [isEmailFormOpen, setIsEmailFormOpen] = useState<boolean>(false);
+
   const handleSignUp = (provider: string) => {
     signIn(provider, { callbackUrl: '/dashboard' });
+  }
+
+  const handleEmailClick = () => {
+    setIsEmailFormOpen(!isEmailFormOpen);
+    console.log(isEmailFormOpen)
   }
 
   return (
@@ -70,6 +77,7 @@ const SignUp = () => {
         <div>
           <Button
             data-testid={signUpPageTestIds.emailButton}
+            onClick={() => handleEmailClick()}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-email-base w-72 hover:bg-email-darker'
           >
             <IconMail
@@ -83,15 +91,23 @@ const SignUp = () => {
           </Button>
         </div>
       </div>
-      <div className='flex items-center justify-center w-full gap-3 my-4'>
-        <div className='w-5/12 border-b border-b-dark-200' />
-        <p className='font-light text-accent-2xs dark:text-color-secondary'>or</p>
-        <div className='w-5/12 border-b border-b-dark-200' />
-      </div>
-      <div>
-        FORM
-      </div>
-      <div className='flex items-center justify-center mt-5'>
+
+      {isEmailFormOpen && (
+        <div className='mt-4 w-72'>
+          <input 
+            type='email'
+            placeholder='Enter your email'
+            className='w-full py-2 px-3 text-color-primary-reverse focus:outline-none focus:ring-2 focus:ring-primary-500 placeholder:text-gray-400 font-inter rounded-md text-body-xs'
+          />
+          <Button
+            data-testid={signUpPageTestIds.emailContinueButton}
+            className='w-full mt-2 bg-primary-600 transition-all text-white hover:bg-primary-700'
+          >
+            Continue
+          </Button>
+        </div>
+      )}
+      <div className='flex items-center justify-center mt-10'>
         <p className='text-accent-xs'>Already have an account? <span><Link data-testid={signUpPageTestIds.redirectLink} href='/sign-in' className='text-green hover:underline'>Log in here.</Link></span></p>
       </div>
     </div>
