@@ -8,9 +8,12 @@ import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@table
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { signUpPageTestIds } from '@/utils/constants'
+import EmailSignup from '@/components/EmailSignup/EmailSignup'
 
 const SignUp = () => {
   const [isEmailFormOpen, setIsEmailFormOpen] = useState<boolean>(false);
+  const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("")
 
   const handleSignUp = (provider: string) => {
     signIn(provider, { callbackUrl: '/dashboard' });
@@ -18,7 +21,14 @@ const SignUp = () => {
 
   const handleEmailClick = () => {
     setIsEmailFormOpen(!isEmailFormOpen);
-    console.log(isEmailFormOpen)
+    setIsEmailSent(false);
+    setEmail('');
+  }
+
+  const handleEmailSubmit = async (email: string) => {
+    setEmail(email);
+    setIsEmailSent(true);
+    setIsEmailFormOpen(!isEmailFormOpen);
   }
 
   return (
@@ -91,20 +101,18 @@ const SignUp = () => {
           </Button>
         </div>
       </div>
-
-      {isEmailFormOpen && (
-        <div className='mt-4 w-72'>
-          <input 
-            type='email'
-            placeholder='Enter your email'
-            className='w-full py-2 px-3 text-color-primary-reverse focus:outline-none focus:ring-2 focus:ring-primary-500 placeholder:text-gray-400 font-inter rounded-md text-body-xs'
-          />
-          <Button
-            data-testid={signUpPageTestIds.emailContinueButton}
-            className='w-full mt-2 bg-primary-600 transition-all text-white hover:bg-primary-700'
-          >
-            Continue
-          </Button>
+      {isEmailFormOpen && !isEmailSent && (
+        <div className='mt-4'>
+          <EmailSignup onEmailSubmit={handleEmailSubmit} />
+        </div>
+      )}
+      {isEmailSent && (
+        <div className='flex flex-col gap-3 mt-4 text-center'>
+          <p className='text-accent-2xs text-color-primary'>We have sent a login link to <span className='font-medium underline'>{`${email}`}</span>. Please check your inbox and click the link to continue.</p>
+          <button
+            onClick={handleEmailClick}
+            className='text-accent-2xs text-primary-500 hover:underline'>I want to use a different email.
+          </button>
         </div>
       )}
       <div className='flex items-center justify-center mt-10'>
