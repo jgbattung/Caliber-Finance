@@ -64,6 +64,11 @@
   .icon-chevron-bg {
     @apply bg-dark-100 dark:bg-background-800
   }
+
+  /* Button colors */
+  .button-dark {
+    @apply bg-dark-100 hover:bg-dark-200 dark:bg-background-dark-800 dark:hover:bg-dark-200
+  }
 }
 
 
