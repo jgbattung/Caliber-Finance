@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../ui/button';
-import { signUpPageTestIds } from '@/utils/constants';
+import { emailSignupTestIds } from '@/utils/constants';
 import { createUser } from '@/lib/actions/user.actions';
 import { signIn } from 'next-auth/react';
 
@@ -51,13 +51,17 @@ const EmailSignup: React.FC<EmailSignInProps> = ({ onEmailSubmit }) => {
   };
 
   return (
-    <div className='w-72'>
+    <div
+      data-testid={emailSignupTestIds.emailSignupForm}
+      className='w-72'
+    >
       <form
         onSubmit={emailForm.handleSubmit(handleSubmit)}
         className='space-y-4'
       >
         <input 
           {...emailForm.register('email')}
+          data-testid={emailSignupTestIds.emailField}
           type='email'
           placeholder='Enter your email'
           className='w-full px-3 py-2 rounded-md text-color-primary-reverse focus:outline-none focus:ring-2 focus:ring-primary-500 placeholder:text-gray-400 font-inter text-body-xs'
@@ -69,7 +73,7 @@ const EmailSignup: React.FC<EmailSignInProps> = ({ onEmailSubmit }) => {
           <p className='text-error-500 text-accent-xs'>{error}</p>
         )}
         <Button
-          data-testid={signUpPageTestIds.emailContinueButton}
+          data-testid={emailSignupTestIds.emailSubmitButton}
           type='submit'
           className='w-full mt-2 text-white transition-all bg-primary-600 hover:bg-primary-700'
           disabled={isSubmitting}

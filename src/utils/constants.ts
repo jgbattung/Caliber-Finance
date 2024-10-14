@@ -83,7 +83,6 @@ export const signUpPageTestIds = {
   googleButton: "google-button",
   emailButton: "email-button",
   redirectLink: "redirect-link",
-  emailContinueButton: "email-continue-button"
 };
 
 export const signInPageTestIds = {
@@ -94,3 +93,9 @@ export const signInPageTestIds = {
   emailButton: "email-button",
   redirectLink: "redirect-link",
 };
+
+export const emailSignupTestIds = {
+  emailSignupForm: "email-signup-form",
+  emailField: "email-field",
+  emailSubmitButton: "email-submit-button",
+}
