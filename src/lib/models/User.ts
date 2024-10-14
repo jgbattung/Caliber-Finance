@@ -22,6 +22,14 @@ const UserSchema = new mongoose.Schema<IUser>({
   timestamps: true
 });
 
-const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+let User: Model<IUser>;
+
+try {
+  // Try to get the existing model
+  User = mongoose.model<IUser>('User');
+} catch {
+  // If the model doesn't exist, create it
+  User = mongoose.model<IUser>('User', UserSchema);
+}
 
 export default User;

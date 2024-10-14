@@ -36,6 +36,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Install sharp
+      run: npm install sharp
+
     - name: Run linter
       run: npm run lint
 

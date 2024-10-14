@@ -6,8 +6,9 @@ import Logo from '@/public/assets/logo.png'
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Suspense } from 'react'
 
-const AuthError = () => {
+const ErrorContent = () => {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
 
@@ -46,4 +47,10 @@ const AuthError = () => {
   )
 }
 
-export default AuthError
+export default function AuthError() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ErrorContent />
+    </Suspense>
+  )
+}
