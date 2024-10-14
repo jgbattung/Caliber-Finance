@@ -34,6 +34,10 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
+  pages: {
+    signOut: '/sign-in',
+    error: '/error',
+  },
   callbacks: {
     async signIn({ account, profile }) {
       if (account?.provider === 'google' || account?.provider === 'facebook') {
@@ -68,6 +72,13 @@ export const authOptions: NextAuthOptions = {
         }
       }
       return true;
+    },
+    async redirect({ url, baseUrl }) {
+      // Redirect to dashboard after successful authentication
+      if (url.startsWith(baseUrl)) {
+        return `${baseUrl}/dashboard`
+      }
+      return baseUrl
     },
     async session({ session, token }) {
       if (session.user) {
