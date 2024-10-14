@@ -1,7 +1,6 @@
 import EmailSignup from '@/components/EmailSignup/EmailSignup';
 import { emailSignupTestIds } from '@/utils/constants';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { error } from 'console';
 import { signIn } from 'next-auth/react';
 
 jest.mock('next-auth/react', () => ({
