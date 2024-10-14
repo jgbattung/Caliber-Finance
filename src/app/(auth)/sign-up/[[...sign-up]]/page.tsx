@@ -107,7 +107,7 @@ const SignUp = () => {
         </div>
       )}
       {isEmailSent && (
-        <div className='flex flex-col gap-3 mt-4 text-center'>
+        <div className='flex flex-col gap-3 text-center mt-7'>
           <p className='text-accent-2xs text-color-primary'>We have sent a login link to <span className='font-medium underline'>{`${email}`}</span>. Please check your inbox and click the link to continue.</p>
           <button
             onClick={handleEmailClick}
