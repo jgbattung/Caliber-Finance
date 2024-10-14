@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '@/public/assets/logo.png'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -8,10 +8,27 @@ import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@table
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { signUpPageTestIds } from '@/utils/constants'
+import EmailSignup from '@/components/EmailSignup/EmailSignup'
 
 const SignUp = () => {
+  const [isEmailFormOpen, setIsEmailFormOpen] = useState<boolean>(false);
+  const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("")
+
   const handleSignUp = (provider: string) => {
     signIn(provider, { callbackUrl: '/dashboard' });
+  }
+
+  const handleEmailClick = () => {
+    setIsEmailFormOpen(!isEmailFormOpen);
+    setIsEmailSent(false);
+    setEmail('');
+  }
+
+  const handleEmailSubmit = async (email: string) => {
+    setEmail(email);
+    setIsEmailSent(true);
+    setIsEmailFormOpen(!isEmailFormOpen);
   }
 
   return (
@@ -70,6 +87,7 @@ const SignUp = () => {
         <div>
           <Button
             data-testid={signUpPageTestIds.emailButton}
+            onClick={() => handleEmailClick()}
             className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-email-base w-72 hover:bg-email-darker'
           >
             <IconMail
@@ -83,15 +101,21 @@ const SignUp = () => {
           </Button>
         </div>
       </div>
-      <div className='flex items-center justify-center w-full gap-3 my-4'>
-        <div className='w-5/12 border-b border-b-dark-200' />
-        <p className='font-light text-accent-2xs dark:text-color-secondary'>or</p>
-        <div className='w-5/12 border-b border-b-dark-200' />
-      </div>
-      <div>
-        FORM
-      </div>
-      <div className='flex items-center justify-center mt-5'>
+      {isEmailFormOpen && !isEmailSent && (
+        <div className='mt-4'>
+          <EmailSignup onEmailSubmit={handleEmailSubmit} />
+        </div>
+      )}
+      {isEmailSent && (
+        <div className='flex flex-col gap-3 text-center mt-7'>
+          <p className='text-accent-2xs text-color-primary'>We have sent a login link to <span className='font-medium underline'>{`${email}`}</span>. Please check your inbox and click the link to continue.</p>
+          <button
+            onClick={handleEmailClick}
+            className='text-accent-2xs text-primary-500 hover:underline'>I want to use a different email.
+          </button>
+        </div>
+      )}
+      <div className='flex items-center justify-center mt-10'>
         <p className='text-accent-xs'>Already have an account? <span><Link data-testid={signUpPageTestIds.redirectLink} href='/sign-in' className='text-green hover:underline'>Log in here.</Link></span></p>
       </div>
     </div>

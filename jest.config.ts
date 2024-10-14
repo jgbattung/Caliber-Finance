@@ -37,7 +37,9 @@ const config: Config = {
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "<rootDir>/src/components/icons/",
-    "<rootDir>/src/components/ui"
+    "<rootDir>/src/components/ui",
+    "/src/lib/mongoose.ts",
+    "/src/lib/actions/user.actions.ts",
   ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -102,7 +104,10 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@/components/(.*)$': '<rootDir>/src/components/$1',
-    '^@/app/(.*)$': '<rootDir>/src/app/$1'
+    '^@/app/(.*)$': '<rootDir>/src/app/$1',
+    '^mongodb$': '<rootDir>/src/__mocks__/mongodb.ts',
+    '^@/lib/mongodb$': '<rootDir>/src/__mocks__/lib/mongodb.ts',
+    '^mongoose$': '<rootDir>/src/__mocks__/mongoose.ts',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

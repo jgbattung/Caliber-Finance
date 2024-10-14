@@ -26,6 +26,10 @@
   .text-color-primary {
     @apply text-text-primary dark:text-text-light-primary;
   }
+
+  .text-color-primary-reverse {
+    @apply text-text-light-primary dark:text-text-primary
+  }
   
   .text-color-secondary {
     @apply text-text-primary-dark dark:text-text-light-primary-dark;
@@ -59,6 +63,11 @@
 
   .icon-chevron-bg {
     @apply bg-dark-100 dark:bg-background-800
+  }
+
+  /* Button colors */
+  .button-dark {
+    @apply bg-dark-100 hover:bg-dark-200 dark:bg-background-dark-800 dark:hover:bg-dark-200
   }
 }
 

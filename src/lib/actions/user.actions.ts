@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use server"
+
 import { revalidatePath } from "next/cache";
 import User from "../models/User";
 import { connectToDB } from "../mongoose";
 
 interface CreateUserParams {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   image?: string;
   provider: string;
@@ -25,18 +27,18 @@ export async function createUser ({
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       // Update existing user
-      existingUser.firstName = firstName;
-      existingUser.lastName = lastName;
+      if (firstName) existingUser.firstName = firstName;
+      if (lastName) existingUser.lastName = lastName;
       existingUser.image = image;
       existingUser.provider = provider;
       await existingUser.save();
     } else {
       const newUser = new User({
-        firstName,
-        lastName,
         email,
-        image,
         provider,
+        ...(firstName && { firstName }),
+        ...(lastName && { lastName }),
+        ...(image && { image }),
       });
       await newUser.save();
     }
