@@ -102,7 +102,7 @@ const SignUp = () => {
         </div>
       </div>
       {isEmailFormOpen && !isEmailSent && (
-        <div className='mt-4'>
+        <div className='w-full mt-4'>
           <EmailSignup onEmailSubmit={handleEmailSubmit} />
         </div>
       )}
