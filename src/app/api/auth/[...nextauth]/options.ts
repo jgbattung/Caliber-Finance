@@ -74,10 +74,12 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // Redirect to dashboard after successful authentication
-      if (url.startsWith(baseUrl)) {
-        return `${baseUrl}/dashboard`
+      if (url.startsWith(`${baseUrl}/api/auth/signin`) && url.includes('error=')) {
+        const errorParam = new URL(url).searchParams.get('error')
+        return `${baseUrl}/error?error=${errorParam}`
       }
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
     async session({ session, token }) {
