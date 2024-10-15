@@ -1,5 +1,6 @@
 "use client"
 
+import EmailSignup from '@/components/EmailSignup/EmailSignup'
 import { Button } from '@/components/ui/button'
 import Logo from '@/public/assets/logo.png'
 import { signInPageTestIds } from '@/utils/constants'
@@ -7,17 +8,34 @@ import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@table
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 const SignIn = () => {
+  const [isEmailFormOpen, setIsEmailFormOpen] = useState<boolean>(false);
+  const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+
   const handleSignIn = (provider: string) => {
     signIn(provider, { callbackUrl: '/dashboard' });
   }
 
+  const handleEmailClick = () => {
+    setIsEmailFormOpen(!isEmailFormOpen);
+    setIsEmailSent(false);
+    setEmail('');
+  }
+
+  const handleEmailSubmit = async (email: string) => {
+    setEmail(email);
+    setIsEmailSent(true);
+    setIsEmailFormOpen(!isEmailFormOpen);
+  }
+
+
   return (
     <div 
       data-testid={signInPageTestIds.signInContainer}
-      className='flex flex-col items-center w-full'
+      className='flex flex-col items-center w-full max-w-md px-1 mx-auto'
     >
       <div className='flex flex-col justify-start w-full gap-10'>
         <Image
@@ -33,11 +51,11 @@ const SignIn = () => {
         </div>
       </div>
       <div className='flex flex-col items-center justify-center w-full gap-3 mt-10'>
-        <div>
+        <div className='w-full'>
           <Button
             data-testid={signInPageTestIds.facebookButton}
             onClick={() => handleSignIn('facebook')}
-            className='relative flex items-center justify-center py-5 transition-all border rounded-md w-72 hover:bg-facebook-darker bg-facebook-base'
+            className='relative flex items-center justify-center w-full py-5 transition-all border rounded-md hover:bg-facebook-darker bg-facebook-base'
           >
             <IconBrandFacebookFilled 
               size={18}
@@ -50,11 +68,11 @@ const SignIn = () => {
             </p>
           </Button>
         </div>
-        <div>
+        <div className='w-full'>
           <Button
             data-testid={signInPageTestIds.googleButton}
             onClick={() => handleSignIn('google')}
-            className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-google-base w-72 hover:bg-google-darker'
+            className='relative flex items-center justify-center w-full py-5 transition-all border rounded-md bg-google-base hover:bg-google-darker'
           >
             <IconBrandGoogleFilled 
               size={18}
@@ -67,10 +85,11 @@ const SignIn = () => {
             </p>
           </Button>
         </div>
-        <div>
+        <div className='w-full'>
           <Button
             data-testid={signInPageTestIds.emailButton}
-            className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-email-base w-72 hover:bg-email-darker'
+            onClick={() => handleEmailClick()}
+            className='relative flex items-center justify-center w-full py-5 transition-all border rounded-md bg-email-base hover:bg-email-darker'
           >
             <IconMail
               size={18}
@@ -83,14 +102,20 @@ const SignIn = () => {
           </Button>
         </div>
       </div>
-      <div className='flex items-center justify-center w-full gap-3 my-4'>
-        <div className='w-5/12 border-b border-b-dark-200' />
-        <p className='font-light text-accent-2xs dark:text-color-secondary'>or</p>
-        <div className='w-5/12 border-b border-b-dark-200' />
-      </div>
-      <div>
-        FORM
-      </div>
+      {isEmailFormOpen && !isEmailSent && (
+        <div className='w-full mt-4'>
+          <EmailSignup onEmailSubmit={handleEmailSubmit} />
+        </div>
+      )}
+      {isEmailSent && (
+        <div className='flex flex-col gap-3 text-center mt-7'>
+          <p className='text-accent-2xs text-color-primary'>We have sent a login link to <span className='font-medium underline'>{`${email}`}</span>. Please check your inbox and click the link to continue.</p>
+          <button
+            onClick={handleEmailClick}
+            className='text-accent-2xs text-primary-500 hover:underline'>I want to use a different email.
+          </button>
+        </div>
+      )}
       <div className='flex items-center justify-center mt-5'>
         <p className='text-accent-xs'>{`Don't have an account?`} <span><Link data-testid={signInPageTestIds.redirectLink} href='/sign-up' className='text-green hover:underline'>Register here.</Link></span></p>
       </div>

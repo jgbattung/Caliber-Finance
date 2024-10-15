@@ -34,7 +34,7 @@ const SignUp = () => {
   return (
     <div
       data-testid={signUpPageTestIds.signUpContainer}
-      className='flex flex-col items-center w-full'
+      className='flex flex-col items-center w-full max-w-md px-5 mx-auto'
     >
       <div className='flex flex-col justify-start w-full gap-10'>
         <Image 
@@ -50,11 +50,11 @@ const SignUp = () => {
         </div>
       </div>
       <div className='flex flex-col items-center justify-center w-full gap-3 mt-10'>
-        <div>
+      <div className='w-full'>
           <Button
             data-testid={signUpPageTestIds.facebookButton}
             onClick={() => handleSignUp('facebook')}
-            className='relative flex items-center justify-center py-5 transition-all border rounded-md w-72 hover:bg-facebook-darker bg-facebook-base'
+            className='relative flex items-center justify-center w-full py-5 transition-all border rounded-md hover:bg-facebook-darker bg-facebook-base'
           >
             <IconBrandFacebookFilled 
               size={18}
@@ -67,11 +67,11 @@ const SignUp = () => {
             </p>
           </Button>
         </div>
-        <div>
+        <div className='w-full'>
           <Button
             data-testid={signUpPageTestIds.googleButton}
             onClick={() => handleSignUp('google')}
-            className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-google-base w-72 hover:bg-google-darker'
+            className='relative flex items-center justify-center w-full py-5 transition-all border rounded-md bg-google-base hover:bg-google-darker'
           >
             <IconBrandGoogleFilled 
               size={18}
@@ -84,11 +84,11 @@ const SignUp = () => {
             </p>
           </Button>
         </div>
-        <div>
+        <div className='w-full'>
           <Button
             data-testid={signUpPageTestIds.emailButton}
             onClick={() => handleEmailClick()}
-            className='relative flex items-center justify-center py-5 transition-all border rounded-md bg-email-base w-72 hover:bg-email-darker'
+            className='relative flex items-center justify-center w-full py-5 transition-all border rounded-md bg-email-base hover:bg-email-darker'
           >
             <IconMail
               size={18}
@@ -102,7 +102,7 @@ const SignUp = () => {
         </div>
       </div>
       {isEmailFormOpen && !isEmailSent && (
-        <div className='mt-4'>
+        <div className='w-full mt-4'>
           <EmailSignup onEmailSubmit={handleEmailSubmit} />
         </div>
       )}

@@ -53,7 +53,7 @@ const EmailSignup: React.FC<EmailSignInProps> = ({ onEmailSubmit }) => {
   return (
     <div
       data-testid={emailSignupTestIds.emailSignupForm}
-      className='w-72'
+      className='w-full'
     >
       <form
         onSubmit={emailForm.handleSubmit(handleSubmit)}
