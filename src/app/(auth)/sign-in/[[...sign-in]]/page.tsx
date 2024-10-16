@@ -8,18 +8,27 @@ import { IconBrandFacebookFilled, IconBrandGoogleFilled, IconMail } from '@table
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const SignIn = () => {
   const [isEmailFormOpen, setIsEmailFormOpen] = useState<boolean>(false);
   const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isTransitioning) {
+      const timer = setTimeout(() => setIsTransitioning(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isTransitioning]);
 
   const handleSignIn = (provider: string) => {
     signIn(provider, { callbackUrl: '/dashboard' });
   }
 
   const handleEmailClick = () => {
+    setIsTransitioning(true);
     setIsEmailFormOpen(!isEmailFormOpen);
     setIsEmailSent(false);
     setEmail('');
@@ -34,16 +43,16 @@ const SignIn = () => {
 
   return (
     <div 
-      className='flex flex-col items-center w-full max-w-md px-1 mx-auto xl:flex-row xl:max-w-full'
+      className='flex flex-col items-center w-full max-w-md px-1 mx-auto transition-all duration-500 ease-in-out xl:flex-row xl:max-w-full'
     >
       <div
-        className='flex items-center justify-center w-full h-dvh max-xl:hidden xl:block basis-1/2 xl:bg-white'
+        className='flex items-center justify-center w-full transition-all duration-500 ease-in-out h-dvh max-xl:hidden xl:block basis-1/2 xl:bg-white'
       >
         <p>CALIBER</p>
       </div>
       <div
         data-testid={signInPageTestIds.signInContainer}
-        className='flex flex-col items-center w-full max-w-md px-1 mx-auto xl:max-w-screen-md xl:px-40 basis-1/2'
+        className='flex flex-col items-center w-full max-w-md px-1 mx-auto transition-all duration-500 ease-in-out xl:max-w-screen-md xl:px-40 basis-1/2'
       >
         <div className='flex flex-col justify-start w-full gap-10'>
           <Image
@@ -110,24 +119,35 @@ const SignIn = () => {
             </Button>
           </div>
         </div>
-        {isEmailFormOpen && !isEmailSent && (
-          <div className='w-full mt-4'>
-            <EmailSignup onEmailSubmit={handleEmailSubmit} />
-          </div>
-        )}
-        {isEmailSent && (
-          <div className='flex flex-col gap-3 text-center mt-7'>
-            <p className='text-accent-2xs text-color-primary'>We have sent a login link to <span className='font-medium underline'>{`${email}`}</span>. Please check your inbox and click the link to continue.</p>
-            <button
-              onClick={handleEmailClick}
-              className='text-accent-2xs text-primary-500 hover:underline'>I want to use a different email.
-            </button>
-          </div>
-        )}
+        <div 
+          className={`w-full overflow-hidden transition-all duration-300 ease-in-out ${
+          isEmailFormOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {(isEmailFormOpen || isTransitioning) && !isEmailSent && (
+            <div className='w-full mt-4'>
+              <EmailSignup onEmailSubmit={handleEmailSubmit} />
+            </div>
+          )}
+        </div>
+        <div
+          className={`flex flex-col gap-3 text-center mt-7 overflow-hidden transition-all duration-300 ease-in-out ${
+            isEmailSent ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {isEmailSent && (
+            <div className='flex flex-col gap-3 text-center mt-7'>
+              <p className='text-accent-2xs text-color-primary'>We have sent a login link to <span className='font-medium underline'>{`${email}`}</span>. Please check your inbox and click the link to continue.</p>
+              <button
+                onClick={handleEmailClick}
+                className='text-accent-2xs text-primary-500 hover:underline'>I want to use a different email.
+              </button>
+            </div>
+          )}
+        </div>
         <div className='flex items-center justify-center mt-10'>
           <p className='text-accent-xs'>{`Don't have an account?`} <span><Link data-testid={signInPageTestIds.redirectLink} href='/sign-up' className='text-green hover:underline'>Register here.</Link></span></p>
         </div>
-
       </div>
     </div>
   )
