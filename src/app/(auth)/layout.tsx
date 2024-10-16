@@ -13,7 +13,7 @@ export default function RootLayout({ children }: {  children: React.ReactNode })
   return (
     <html lang="en">
       <body className={`${inter.className} bg-darkest text-primary`}>
-        <main className="flex items-center justify-center px-8 h-dvh">
+        <main className="flex items-center justify-center h-dvh">
           {children}
         </main>
       </body>
