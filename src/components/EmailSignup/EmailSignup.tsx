@@ -30,6 +30,7 @@ const EmailSignup: React.FC<EmailSignInProps> = ({ onEmailSubmit }) => {
       await createUser({
         email: data.email,
         provider: 'email',
+        confirmedName: false,
       });
 
       const result = await signIn('email', {
