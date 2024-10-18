@@ -11,6 +11,7 @@ interface CreateUserParams {
   email: string;
   image?: string;
   provider: string;
+  confirmedName: boolean;
 }
 
 export async function createUser ({
@@ -19,6 +20,7 @@ export async function createUser ({
   email,
   image,
   provider,
+  confirmedName,
 }: CreateUserParams): Promise<void> {
   await connectToDB();
 
@@ -31,11 +33,13 @@ export async function createUser ({
       if (lastName) existingUser.lastName = lastName;
       existingUser.image = image;
       existingUser.provider = provider;
+      existingUser.confirmedName = confirmedName;
       await existingUser.save();
     } else {
       const newUser = new User({
         email,
         provider,
+        confirmedName: false,
         ...(firstName && { firstName }),
         ...(lastName && { lastName }),
         ...(image && { image }),

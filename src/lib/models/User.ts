@@ -8,6 +8,7 @@ export interface IUser extends Document {
   password?: string;
   emailVerified?: Date;
   provider?: string;
+  confirmedName: boolean;
 }
 
 const UserSchema = new mongoose.Schema<IUser>({
@@ -18,6 +19,7 @@ const UserSchema = new mongoose.Schema<IUser>({
   password: { type: String },
   emailVerified: { type: Date },
   provider: { type: String },
+  confirmedName: { type: Boolean },
 }, {
   timestamps: true
 });

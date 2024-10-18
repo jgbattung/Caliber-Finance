@@ -39,9 +39,12 @@ export const authOptions: NextAuthOptions = {
     error: '/error',
   },
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({ user, account, profile }) {
       if (account?.provider === 'google' || account?.provider === 'facebook') {
         try {
+          // Check if a user with this email already exists
+          const existingUser = await (authOptions.adapter as any).getUserByEmail(user.email);
+
           let firstName = '', lastName = '';
 
           if (account.provider === 'google') {
@@ -58,13 +61,25 @@ export const authOptions: NextAuthOptions = {
             }
           }
 
+          if (existingUser) {
+            // If the user exists, link the new OAuth account to the existing user
+            await (authOptions.adapter as any).linkAccount({
+              userId: existingUser.id,
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+              type: account.type,
+            });
+          }
+    
           await createUser({
             firstName,
             lastName,
-            email: profile?.email || '',
-            image: profile?.image || (profile as any).picture || '',
+            email: user.email || '',
+            image: user.image || (user as any).picture || '',
             provider: account.provider,
+            confirmedName: false,
           });
+    
           return true;
         } catch (error) {
           console.error('Error creating user:', error);
@@ -84,14 +99,16 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = token.sub as string;
         session.user.provider = token.provider as string;
+        session.user.email = token.email as string;
       }
       return session
     },
     async jwt({ token, user, account }) {
       if (user) {
-        token.id = user.id;
+        token.sub = user.id;
+        token.email = user.email;
       }
       if (account) {
         token.provider = account.provider;
