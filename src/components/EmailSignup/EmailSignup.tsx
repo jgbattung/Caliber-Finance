@@ -35,6 +35,7 @@ const EmailSignup: React.FC<EmailSignInProps> = ({ onEmailSubmit }) => {
 
       const result = await signIn('email', {
         email: data.email,
+        callbackUrl: '/dashboard',
         redirect: false,
       });
 
