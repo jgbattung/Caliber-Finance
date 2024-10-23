@@ -1,5 +1,10 @@
 import mongoose, { Document, Model } from 'mongoose';
 
+interface IUserMethods {
+  addProvider: (providerName: AuthProvider, accountId?: string) => void;
+  updateLastLogin: () => void;
+}
+
 interface IProvider {
   name: string;
   accoundId?: string;
@@ -21,6 +26,8 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+type UserModel = Model<IUser, object, IUserMethods>;
 
 const ProviderSchema = new mongoose.Schema({
   name: {
@@ -79,14 +86,14 @@ UserSchema.methods.updateLastLogin = function() {
   this.lastLogin = new Date();
 };
 
-let User: Model<IUser>;
+let User: UserModel;
 
 try {
   // Try to get the existing model
-  User = mongoose.model<IUser>('User');
+  User = mongoose.model<IUser, UserModel>('User');
 } catch {
   // If the model doesn't exist, create it
-  User = mongoose.model<IUser>('User', UserSchema);
+  User = mongoose.model<IUser, UserModel>('User', UserSchema);
 }
 
 export default User;
