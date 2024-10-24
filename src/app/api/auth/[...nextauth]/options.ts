@@ -148,13 +148,40 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async redirect({ url, baseUrl }) {
-      if (url.startsWith(`${baseUrl}/api/auth/signin`) && url.includes('error=')) {
-        const errorParam = new URL(url).searchParams.get('error')
-        return `${baseUrl}/error?error=${errorParam}`
+      try {
+        if (url.includes('error=Verification') || 
+            (url.includes('/api/auth/callback/email') && url.includes('error'))) {
+          return `${baseUrl}/error?error=Verification`;
+        }
+
+        if (url.includes('error=')) {
+          const errorUrl = new URL(url);
+          const error = errorUrl.searchParams.get('error');
+          return `${baseUrl}/error?error=${error}`;
+        }
+
+        if (url.startsWith(`${baseUrl}/api/auth/callback`)) {
+          const callbackUrl = new URL(url);
+          const destination = callbackUrl.searchParams.get('callbackUrl');
+          if (destination && destination.startsWith(baseUrl)) {
+            return destination;
+          }
+          return `${baseUrl}/dashboard`;
+        }
+
+        if (url.startsWith('/')) {
+          return `${baseUrl}${url}`;
+        }
+
+        if (url.startsWith(baseUrl)) {
+          return url;
+        }
+
+        return baseUrl;
+      } catch (error) {
+        console.error('Redirect error:', error);
+        return `${baseUrl}/error?error=RedirectError`;
       }
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      else if (new URL(url).origin === baseUrl) return url
-      return baseUrl
     },
     async session({ session, token }) {
       if (session.user) {

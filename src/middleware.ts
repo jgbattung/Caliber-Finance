@@ -5,6 +5,7 @@ const publicRoutes = [
   '/',
   '/sign-in',
   '/sign-out',
+  '/error',
 ];
 
 export default withAuth(
