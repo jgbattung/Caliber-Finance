@@ -6,12 +6,37 @@ import { NextAuthOptions } from "next-auth"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "@/lib/mongodb"
 import { createUser } from "@/lib/actions/user.actions"
+import { AuthProvider } from "@/lib/models/User"
+
+interface IGoogleProfile {
+  given_name?: string;
+  family_name?: string;
+  picture?: string;
+  email_verified?: boolean;
+}
+
+interface IFacebookProfile {
+  name?: string;
+  email?: string;
+  picture?: {
+    data?: {
+      url?: string;
+    };
+  };
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "select_account",
+          access_type: "offline",
+          response_type: "code"
+        }
+      },
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID!,
@@ -26,67 +51,101 @@ export const authOptions: NextAuthOptions = {
           pass: process.env.EMAIL_SERVER_PASSWORD
         }
       },
-      from: process.env.EMAIL_FROM
+      from: process.env.EMAIL_FROM,
+      maxAge: 10 * 60,
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 180 * 24 * 60 * 60,   // 180 days
+    updateAge: 7 * 24 * 60 * 60  // 7 days
   },
   pages: {
     signOut: '/sign-in',
+    signIn: '/sign-in',
     error: '/error',
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if (account?.provider === 'google' || account?.provider === 'facebook') {
-        try {
-          // Check if a user with this email already exists
-          const existingUser = await (authOptions.adapter as any).getUserByEmail(user.email);
+    async signIn({ user, account, profile },) {
+      try {
+        if (!user?.email) {
+          console.error('Sign-in rejected: No email provided');
+          return false;
+        }
 
-          let firstName = '', lastName = '';
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(user.email)) {
+          console.error('Sign-in rejected: Invalid email format');
+          return false;
+        }
 
-          if (account.provider === 'google') {
-            firstName = (profile as any).given_name || '';
-            lastName = (profile as any).family_name || '';
-          } else if (account.provider === 'facebook') {
-            const nameParts = ((profile as any).name || '').split(' ');
+        let firstName = '', lastName = '', imageUrl = '';
+        const adapter = authOptions.adapter as any;
+        const existingUser = await adapter.getUserByEmail(user.email);
+
+        // Parse Provider data
+        switch(account?.provider as AuthProvider) {
+          case 'google': {
+            const googleProfile = profile as IGoogleProfile;
+            if (!googleProfile.email_verified) {
+              console.error('Sign-in rejected: Google email not verified');
+              return false;
+            }
+            firstName = googleProfile.given_name || '';
+            lastName = googleProfile.family_name || '';
+            imageUrl = googleProfile.picture || user.image || '';
+            break;
+          }
+          case 'facebook': {
+            const facebookProfile = profile as IFacebookProfile;
+            const nameParts = (facebookProfile.name || '').split(' ');
             if (nameParts.length > 1) {
               lastName = nameParts.pop() || '';
               firstName = nameParts.join(' ');
             } else {
               firstName = nameParts[0] || '';
-              lastName = '';
             }
+            imageUrl = facebookProfile.picture?.data?.url || user.image || '';
+            break;
           }
-
-          if (existingUser) {
-            // If the user exists, link the new OAuth account to the existing user
-            await (authOptions.adapter as any).linkAccount({
-              userId: existingUser.id,
-              provider: account.provider,
-              providerAccountId: account.providerAccountId,
-              type: account.type,
-            });
+          case 'email': {
+            break;
           }
-    
-          await createUser({
-            firstName,
-            lastName,
-            email: user.email || '',
-            image: user.image || (user as any).picture || '',
-            provider: account.provider,
-            confirmedName: false,
-          });
-    
-          return true;
-        } catch (error) {
-          console.error('Error creating user:', error);
-          return false;
+          default: {
+            console.error('Sign-in rejected: Unsupported provider');
+            return false
+          }
         }
+
+        // Link account if user exists
+        if (existingUser && account) {
+          await adapter.linkAccount({
+            userId: existingUser.id,
+            provider: account.provider,
+            providerAccountId: account.providerAccountId,
+            type: account.type,
+          });
+        }
+
+        // Create/update user in DB
+        await createUser({
+          firstName,
+          lastName,
+          email: user.email,
+          image: imageUrl,
+          provider: account?.provider as AuthProvider,
+          providerAccountId: account?.providerAccountId,
+          confirmedName: false,
+        });
+
+        return true;
+
+      } catch (error) {
+        console.error('Error in signin callback:', error);
+        return false;
       }
-      return true;
     },
     async redirect({ url, baseUrl }) {
       if (url.startsWith(`${baseUrl}/api/auth/signin`) && url.includes('error=')) {
