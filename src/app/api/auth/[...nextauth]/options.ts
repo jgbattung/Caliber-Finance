@@ -2,11 +2,12 @@
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import EmailProvider from "next-auth/providers/email"
-import { NextAuthOptions } from "next-auth"
+import { NextAuthOptions, Session } from "next-auth"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "@/lib/mongodb"
 import { createUser } from "@/lib/actions/user.actions"
 import { AuthProvider } from "@/lib/models/User"
+import { JWT } from "next-auth/jwt"
 
 interface IGoogleProfile {
   given_name?: string;
@@ -23,6 +24,24 @@ interface IFacebookProfile {
       url?: string;
     };
   };
+}
+
+interface IExtendedSession extends Session {
+  user: {
+    id: string;
+    email: string;
+    provider: string;
+    name?: string | null;
+    image?: string | null;
+    emailVerified?: Date | null;
+  }
+}
+
+interface IExtendedJWT extends JWT {
+  provider?: string;
+  email?: string;
+  emailVerified?: Date | null;
+  lastLogin?: Date;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -183,23 +202,38 @@ export const authOptions: NextAuthOptions = {
         return `${baseUrl}/error?error=RedirectError`;
       }
     },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub as string;
-        session.user.provider = token.provider as string;
-        session.user.email = token.email as string;
+    async jwt({ token, user, account, trigger, session }): Promise<IExtendedJWT> {
+      if (account && user) {
+        return {
+          ...token,
+          id: user.id,
+          email: user.email || undefined,
+          provider: account.provider,
+          emailVerified: user.emailVerified,
+          lastLogin: new Date()
+        };
       }
-      return session
+
+      if (trigger === "update" && session) {
+        return { ...token, ...session };
+      }
+
+      return token;
     },
-    async jwt({ token, user, account }) {
-      if (user) {
-        token.sub = user.id;
-        token.email = user.email;
+    async session({ session, token }): Promise<IExtendedSession> {
+      if (session.user) {
+        session.user = {
+          ...session.user,
+          id: token.sub!,
+          email: token.email || '',
+          provider: token.provider as string,
+          emailVerified: token.emailVerified,
+        };
+
+        delete (session as any).password;
       }
-      if (account) {
-        token.provider = account.provider;
-      }
-      return token
+
+      return session as IExtendedSession;
     },
   },
 }
