@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 const publicRoutes = [
   '/',
   '/sign-in',
+  '/sign-up',
   '/sign-out',
   '/error',
 ];
