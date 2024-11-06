@@ -45,11 +45,6 @@ const SignUp = () => {
       className='flex flex-col items-center w-full max-w-md px-1 mx-auto transition-all duration-500 ease-in-out xl:flex-row xl:max-w-full'
     >
       <div
-        className='flex items-center justify-center w-full transition-all duration-500 ease-in-out h-dvh max-xl:hidden xl:block basis-1/2 xl:bg-white'
-      >
-        <p>CALIBER</p>
-      </div>
-      <div
         data-testid={signUpPageTestIds.signUpContainer}
         className='flex flex-col items-center w-full max-w-md px-1 mx-auto transition-all duration-500 ease-in-out xl:max-w-screen-md xl:px-40 basis-1/2'
       >

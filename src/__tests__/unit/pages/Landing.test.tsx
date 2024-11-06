@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
-import Landing from "@/app/page";
+import Landing from "@/app/(marketing)/page";
 import { landingPageTestsIds } from "@/utils/constants";
 import { render, screen } from "@testing-library/react";
 

@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
-import Logo from '../public/assets/logo.png'
-import Link from 'next/link'
+import Logo from '../../public/assets/logo.png'
 import { landingPageTestsIds } from '@/utils/constants'
+import Link from 'next/link'
 
 const Landing = () => {
   return (
@@ -16,6 +16,7 @@ const Landing = () => {
           alt='Caliber logo'
           width={200}
           height={90}
+          priority
         />
         <p className='text-body-xs'>
           Precision finance for a powerful future
