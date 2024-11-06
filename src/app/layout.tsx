@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <SessionWrapper>
-      <html lang="en">
-        <body className={`${inter.className} bg-darkest text-primary`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-darkest text-primary`}>
+        <SessionWrapper>
           <ThemeProvider>
             {children}
           </ThemeProvider>
-        </body>
-      </html>
-    </SessionWrapper>
+        </SessionWrapper>
+      </body>
+    </html>
   )
 }
