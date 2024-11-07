@@ -84,7 +84,7 @@ export async function createUser ({
 export async function getUserById(userId: string) {
   await connectToDB();
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).lean();
 
     if (!user) {
       throw new Error("User not found");
