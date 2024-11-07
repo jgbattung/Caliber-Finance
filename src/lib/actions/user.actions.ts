@@ -80,3 +80,19 @@ export async function createUser ({
     throw new Error(`Failed to create user: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
+
+export async function getUserById(userId: string) {
+  await connectToDB();
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return user;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    throw new Error("Failed to fetch user");
+  }
+}
